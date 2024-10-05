@@ -1,7 +1,8 @@
 --liquibase formatted sql
 
---changeset test:1
-CREATE TABLE testtabel6(
+--changeset DJ:init
+DROP TABLE IF EXISTS DSA_bets;
+CREATE TABLE DSA_bets(
 speelronde varchar (10)
 ,seizoen varchar (20)
 ,competitie varchar (10)

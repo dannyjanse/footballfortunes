@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  extract:
+    build: .
+    volumes:
+      - "C:/Users/JanseDanny/OneDrive/Documenten Danny/Football Fortunes:/app/data"
+    command: python extract.py
+

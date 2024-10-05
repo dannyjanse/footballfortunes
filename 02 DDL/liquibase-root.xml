@@ -8,5 +8,7 @@
       http://www.liquibase.org/xml/ns/pro 
       http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.8.xsd">  
 
-    <include file="test2.sql"/>  
+    <include file="DSA_fd_stats.sql"/>
+    <include file="DSA_oddapi_odds.sql"/>
+    <include file="DSA_bets.sql"/>
 </databaseChangeLog> 

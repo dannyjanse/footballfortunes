@@ -14,7 +14,4 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # Stap 6: Stel de SQLite database in als volume (optioneel als je data persistent wilt maken)
-VOLUME ["app/db"]
-
-# Stap 8: Specificeer het commando om de Python-applicatie te starten
-CMD ["python", "extract.py"]
+#VOLUME ["app/data"]

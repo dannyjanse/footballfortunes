@@ -8,13 +8,11 @@ print ('Proces gestart')
   # ETL_results draai je eenmalig na een speelronde
   # ETL_bets_historie draai je eenmalig nadat alle inzetten gedaan zijn voor een specifieke speelronde
   # ETL_bet_advies kun je meerdere keren draaien richting een speelronde om te kijken naar interessante odds
-  # Masterdata check je zo nu en dan. Niet heel veel reden om te denken dat daar iets mis zit als alle eerder kwaliteit checks OK zijn
 EXT_results = 'ja'
-EXT_bet_historie = 'ja'
-EXT_odds = 'ja'
-Controle = 'nee'
+EXT_bet_historie = 'nee'
+EXT_odds = 'nee'
 
-######################################### CONNECTIE ################################
+######################################### CONNECTIE MAKEN ################################
 
 # connectie maken met db
 psy_connection = myf.connect_to_db()[0]
@@ -25,29 +23,25 @@ sqal_connection = myf.connect_to_db()[1]
 # geef aan welke competities in scope zijn en welk seizoen opgehaald moet worden
 fd_stats_URL = 'https://www.football-data.co.uk/mmz4281'
 competities = ['E0','E1','D1','I1','SP1','FR1','N1','B1','P1','T1','G1']
-seizoen = 2324
+seizoen = 2425
 
 if EXT_results == 'ja':
   
   # na iedere speelronde haal je resultaten op en verwerk je de gerealiseerde bets, eenmalig.
   # voor de hierboven opgegeven competities en seizoen worden alle resultaten van website football-data gehaald.
-  # de resultaten worden vergeleken de resultaten die reeds beschikbaar zijn in DSA.fd_stats. De delta wordt toegevoegd aan DSA
+  # de resultaten worden vergeleken met de resultaten die reeds beschikbaar zijn in DSA.fd_stats. De delta wordt toegevoegd aan DSA
   # Er zit check op kolomnamen in de functie dus is proces robuust voor wijzigingen in kolomstructuur van football-data.
-  # in de DSA staat een full load van alle resultaten --> dat is nodig voor dwa.odds
   myf.fd_stats(psy_connection, sqal_connection, fd_stats_URL, competities, seizoen)
 
-  
-
-############################################### ETL Betshistorie #########################################
+######################################### ETL Betshistorie #########################################
   
 if EXT_bet_historie == 'ja':
   
-  # De tabel dsa.bets wordt geleegd.
+  # De tabel dsa_bets wordt geleegd.
   # Verolgens worden alle excelbestanden in bets_realisatie ingelezen in de DSA.
   myf.bets(psy_connection, sqal_connection)
 
-
-############################################# ETL Betgenerator ############################################
+########################################## ETL Betgenerator ############################################
 
 if EXT_odds == 'ja':
   
@@ -64,14 +58,7 @@ if EXT_odds == 'ja':
   # DSA wordt geladen met nieuwe odds, of bestaande odds worden geupdate
   myf.oddapi_odds(psy_connection, sqal_connection, URL, apikey, regions, markets, competities)
 
-####################################### MASTERDATA ###############################
-
-##if Controle == 'ja':
-  ##ctrl.quality_control(sqal_connection, 'dsa_fd_stats')
-  ##ctrl.quality_control(sqal_connection, 'dsa_odd_api')
-  ##ctrl.quality_control(sqal_connection, 'dwa_bets')
-  ##ctrl.quality_control(sqal_connection, 'masterdata')
-
+########################################### CONNECTIE SLUITEN ##########################################
 
 myf.close_connection_db(psy_connection, sqal_connection)
 end_time = time.time()
