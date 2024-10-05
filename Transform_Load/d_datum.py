@@ -34,13 +34,6 @@ def d_datum(psy_connection):
             FROM dates)
     );                    
     """)
-
-    psy_cursor.execute(
-        """
-    UPDATE dsa_update
-    SET update_datum = current_date
-    WHERE tabelnaam = 'd_datum';                      
-    """)
     
     psy_connection.commit()  
                             

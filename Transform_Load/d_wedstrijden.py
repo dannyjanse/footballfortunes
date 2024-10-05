@@ -55,13 +55,6 @@ def d_wedstrijden(psy_connection, sqal_connection):
     sqal_connection.commit()
     psy_connection.commit()
     print(f'het aantal nieuwe wedstrijden, toegevoegd vanuit odd_api: {aantal_nieuw_oddapi_odds}')
-
-    # update upate_tabel
-    psy_cursor.execute("""
-                        UPDATE dsa_update
-                        SET update_datum = date('now')
-                        WHERE tabelnaam = 'd_wedstrijden';                      
-                        """)
     
     psy_connection.commit()
     print('transform & load d_wedstrijden gereed')

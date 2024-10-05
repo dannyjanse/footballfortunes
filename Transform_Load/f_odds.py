@@ -37,12 +37,6 @@ def f_odds(psy_connection):
             ON all_odds.hometeam = dw.hometeam AND all_odds.awayteam = dw.awayteam
         ) odd_conf;                         
     """)
-
-    psy_cursor.execute("""
-    UPDATE dsa_update
-    SET update_datum = date('now')
-    WHERE tabelnaam = 'f_odds';                      
-    """)
-    
+   
     psy_connection.commit()
     print('transform & load f_odds gereed')

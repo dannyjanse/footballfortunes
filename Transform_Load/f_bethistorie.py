@@ -17,12 +17,6 @@ def f_bethistorie(psy_connection):
     INSERT INTO dwa_f_bethistorie
     SELECT * FROM nieuwe_odds;                    
     """)
-
-    psy_cursor.execute("""
-    UPDATE dsa_update
-    SET update_datum = date ('now')
-    WHERE tabelnaam = 'f_bethistorie';                      
-    """)
     
     psy_connection.commit()
     print('transform & load f_bethistorie gereed')

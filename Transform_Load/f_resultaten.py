@@ -47,12 +47,5 @@ def f_resultaten(psy_connection):
     ;            
     """)  
 
-    psy_cursor.execute("""
-    UPDATE dsa_update
-    SET update_datum = date('now')
-    WHERE tabelnaam = 'f_resultaten'
-    ;                      
-    """)  
-
     psy_connection.commit()
     print(f'transform & load f_resultaten gereed')
