@@ -1,0 +1,26 @@
+Belangrijkste aanpassingen aan de pijplijn:
+- Maak zuivere scheiding tussen ophalen data en verwerken in database.
+- Het ophalen van data mag een specifieke functie zijn al moet het mogelijk zijn om generieke functie maken voor inlezen CSV. Moet robuust zijn voor wijzigingen in kolomnamen. Dat zou inputvariabele moeten zijn.
+- Voor zowel stats als odds werk ik nu met een delta functie in de Extract fase. Beter om een temp_table te maken.
+- Maak een SCD procedure voor het overhevelen van de data van tabel a naar b obv sleutel, inclusief de update functie. Hiervoor zullen ook sleutels beter gedefinieerd moeten worden.
+- Bestanden zijn niet dusdanig groot dat in DSA niet een full load past. Dat betekent dat het geen zin heeft om temp_tables voor DWA te maken.
+- De Transform & Load zou een Procedure moeten zijn voor iedere tabel, zowel dimensie als feit. Vanuit Python alleen deze procedure aanroepen.
+	Te checken hoe je vanuit procedure informatie teruggeven, zoals het aantal nieuwe wedstrijden of odds dat is toegevoegd --> zie controles
+- Masterdata als een aparte tool ontwikkelen en uit het ETL proces halen. ETL moet slechts signaleren als er data niet compleet is.
+- Het concept van controles zit goed in elkaar. Dit is perfect herbruikbaar voor ETL processen.
+- Betgenerator kan ook meer via Procedures opgezet worden
+- Nader te bepalen wanneer je een procedure gebruikt en python die laat aanroepen en wanneer je python een los sql bestand laat aanroepen --> gevoelsmatig beter via procedures!!
+- Printen van excel is ok zo
+
+Airflow
+- Met airflow zou je de het aanroepen van python functies en sql procedures kunnen regelen, inclusief het meegeven van parameters
+- Om vervolgens mooie rapportages te kijken op het verloop vd pijplijn te volgen
+
+Liquibase?
+- Het opzetten van alle tabellen en procedures zou ik kunnen beheren in een liquibase project --> uitzoeken hoe dat te doen
+
+Opzet
+- Maak een tool voor masterdata mgmt
+- Maak een docker contrainer met airflow pijplijn
+- apart mapje met python tools (of kunnen dit ook tools zijn in apart github project die dan worden binnengehaald)
+- apart mapje met liquibase db mgmt (DDL en Procedures)

@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  liquibase:
+    build: .
+    volumes:
+      - "C:/Users/JanseDanny/OneDrive/Documenten Danny/Football Fortunes/database/DEV:/data"
+    command: --defaultsFile=liquibase.properties update
+
