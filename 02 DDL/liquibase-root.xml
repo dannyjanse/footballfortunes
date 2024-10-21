@@ -11,4 +11,7 @@
     <include file="DSA_fd_stats.sql"/>
     <include file="DSA_oddapi_odds.sql"/>
     <include file="DSA_bets.sql"/>
+    <include file="CONTROLE_wedstrijdaantallen.sql"/>
+    <include file="DWA_d_teams.sql"/>
+    <include file="DWA_d_wedkantoren.sql"/>
 </databaseChangeLog> 

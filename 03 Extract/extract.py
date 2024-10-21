@@ -9,8 +9,8 @@ print ('Proces gestart')
   # ETL_bets_historie draai je eenmalig nadat alle inzetten gedaan zijn voor een specifieke speelronde
   # ETL_bet_advies kun je meerdere keren draaien richting een speelronde om te kijken naar interessante odds
 EXT_results = 'ja'
-EXT_bet_historie = 'nee'
-EXT_odds = 'nee'
+EXT_bet_historie = 'ja'
+EXT_odds = 'ja'
 
 ######################################### CONNECTIE MAKEN ################################
 
@@ -23,7 +23,7 @@ sqal_connection = myf.connect_to_db()[1]
 # geef aan welke competities in scope zijn en welk seizoen opgehaald moet worden
 fd_stats_URL = 'https://www.football-data.co.uk/mmz4281'
 competities = ['E0','E1','D1','I1','SP1','FR1','N1','B1','P1','T1','G1']
-seizoen = 2425
+seizoen = 2324
 
 if EXT_results == 'ja':
   

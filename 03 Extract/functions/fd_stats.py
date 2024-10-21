@@ -5,7 +5,6 @@ def fd_stats(psy_connection, sqal_connection, URL, competities, seizoen):
         from io import StringIO      
 
         print('extract fd_stats gestart')
-        # Bestaande gegevens ophalen (>2022, JAARLIJKS AANPASSEN) om nieuwe gegevens te kunnen bepalen
         # kolomnamen van db ophalen, om ze waar nodig toe te voegen aan de csv bestanden met nieuwe gegevens
         tel_aantal_nieuw = 0
         aantal_al_aanwezig = 0
@@ -23,6 +22,7 @@ def fd_stats(psy_connection, sqal_connection, URL, competities, seizoen):
                 nieuwe_gegevens.rename(columns={'HS':'hsh','AS':'ash'}, inplace=True)
                 nieuwe_gegevens.columns = [naam.lower() for naam in nieuwe_gegevens.columns.tolist()]
                 kolomnamen_nieuw = nieuwe_gegevens.columns
+                kolomnamen_nieuw.values[0] = 'div' # vanaf 2425 geeft de csv een kolomnaam '^&%div' ipv 'div', daar corrigeer ik hier voor
                 
                 # Als in db kolommen staan die ontbreken in CSV met nieuwe gegevens daar wordt deze kolom toegevoegd, zonder data
                 # Dit is nodig om obv kolomnamen_bestaand de waarden op te halen in CSV met nieuwe gegevens, tbv INSERT
@@ -58,7 +58,7 @@ def fd_stats(psy_connection, sqal_connection, URL, competities, seizoen):
                                 )
                                 psy_cursor.execute (
                                         """
-                                        DELETE from DSA_fd_stats WHERE date = 'NaN';
+                                        DELETE from DSA_fd_stats WHERE date is NULL;
                                         """
                                 )
         
