@@ -11,6 +11,9 @@ sqal_connection = myf.connect_to_db()[1]
 
 
 # kwaliteitcontrole dwa
+
+#### CHECK ALLE SLEUTELS
+
 myf.quality_control(sqal_connection, 'dwa_results')
 myf.quality_control(sqal_connection, 'dwa_bets')
 

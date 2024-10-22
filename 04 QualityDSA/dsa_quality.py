@@ -2,7 +2,7 @@ import functions as myf
 import time
 
 start_time = time.time()
-print ('Proces gestart')
+print ('Quality Control DSA gestart')
 
 
 # connectie maken met db
@@ -20,7 +20,7 @@ print(f'HET TOTAAL AANTAL ISSUES UIT DE KWALITEITCONTROLE DSA IS: {aantal_issues
 myf.close_connection_db(psy_connection, sqal_connection)
 end_time = time.time()
 
-print(f'Proces afgerond, duur: {round((end_time - start_time),1)} seconden')
+print(f'Quality Control DSA afgerond, duur: {round((end_time - start_time),1)} seconden')
 
 
 

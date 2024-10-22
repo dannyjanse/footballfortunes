@@ -26,7 +26,6 @@ def bets(psy_connection, sqal_connection):
                         seizoen,
                         competitie,
                         datum,
-                        s_wedstrijd,
                         hometeam,
                         awayteam,
                         best_odd,
@@ -34,10 +33,10 @@ def bets(psy_connection, sqal_connection):
                         rea_inzet,
                         rea_odd,
                         wedkantoor)                      
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);                        
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);                        
                         """
                         ,(str(wedstrijd[0]), str(wedstrijd[1]), str(wedstrijd[2]), str(wedstrijd[3]), str(wedstrijd [4]), str(wedstrijd[5]),
-                          str(wedstrijd[6]), str(wedstrijd[7]), str(wedstrijd[8]), str(wedstrijd[9]), str(wedstrijd[10]), str(wedstrijd[11])))  
+                          str(wedstrijd[6]), str(wedstrijd[7]), str(wedstrijd[8]), str(wedstrijd[9]), str(wedstrijd[10])))  
                 ##aantal_nieuw += 1 
     psy_cursor.execute("""INSERT INTO DSA_bets
                           SELECT 
@@ -45,7 +44,6 @@ def bets(psy_connection, sqal_connection):
                           ,seizoen 
                           ,competitie 
                           ,datum 
-                          ,s_wedstrijd 
                           ,hometeam 
                           ,awayteam 
                           ,best_odd 

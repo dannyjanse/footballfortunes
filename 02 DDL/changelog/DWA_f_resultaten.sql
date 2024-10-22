@@ -1,10 +1,12 @@
 --liquibase formatted sql
 
---changeset DJ:init
+--changeset DJ:init-3
 DROP TABLE IF EXISTS DWA_f_resultaten;
 CREATE TABLE DWA_f_resultaten(
     s_wedstrijd Integer
-    ,date Date
+    ,hometeam Varchar(100)
+    ,awayteam Varchar(100)
+    ,datum Date
     ,fthg Integer
     ,ftag Integer
     ,ftr Varchar(1)

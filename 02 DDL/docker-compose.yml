@@ -4,7 +4,7 @@ services:
   liquibase:
     build: .
     volumes:
-      - "C:/Users/JanseDanny/OneDrive/Documenten Danny/Football Fortunes/database/DEV:/data"
+      - "C:/Users/JanseDanny/OneDrive/Documenten Danny/Football Fortunes/database:/data"
       # - ./db:/data
     command: --defaultsFile=liquibase.properties update
 

@@ -6,7 +6,6 @@ def quality_control(sqal_connection, controle_map):
 
     print(f'{controle_map} quality control gestart')
     
-    parent_directory = os.path.dirname(os.getcwd())
     path = f'{os.getcwd()}/{controle_map}'
     sql_files = glob.glob(path + '/*.sql')
     print(path)

@@ -14,4 +14,10 @@
     <include file="CONTROLE_wedstrijdaantallen.sql"/>
     <include file="DWA_d_teams.sql"/>
     <include file="DWA_d_wedkantoren.sql"/>
+    <include file="DWA_d_datum.sql"/>
+    <include file="DWA_d_wedstrijden.sql"/>
+    <include file="DWA_f_bethistorie.sql"/>
+    <include file="DWA_f_odds.sql"/>
+    <include file="DWA_f_resultaten.sql"/>
+    <include file="DWA_f_vorm.sql"/>
 </databaseChangeLog> 

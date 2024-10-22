@@ -11,6 +11,5 @@ UNION
 --
 SELECT
 CASE WHEN count(*) = 0 THEN 0 ELSE 1 END
-,CASE WHEN count(*) = 0 THEN 'alle records hebben een gerealiseerde inzet' ELSE 'er zijn records waarvoor óf rea_inzet óf rea_odd een "nan" waarde heeft' end
-FROM dsa_bets WHERE rea_inzet = 'nan' OR rea_odd = 'nan'
-;
+,CASE WHEN count(*) = 0 THEN 'alle records in dsa_bets hebben een gerealiseerde inzet' ELSE 'er zijn records in dsa_bets waarvoor óf rea_inzet óf rea_odd een "nan" waarde heeft' end
+FROM dsa_bets WHERE rea_inzet = 'nan' OR rea_odd = 'nan';
