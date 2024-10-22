@@ -1,18 +1,8 @@
-def d_datum(psy_connection):
+DELETE FROM dwa_d_datum;
 
-    print('transform & load d_datum gestart')
-    psy_cursor = psy_connection.cursor()
-        
-    psy_cursor.execute(
-    """
-    DELETE FROM dwa_d_datum;                     
-    """)
-
-    psy_cursor.execute(
-    """
-    INSERT INTO dwa_d_datum 
+INSERT INTO dwa_d_datum 
     WITH RECURSIVE dates(date) AS (
-    SELECT DATE('2009-01-01') -- Start date
+    SELECT DATE('2000-01-01') -- Start date
     UNION ALL
     SELECT DATE(date, '+1 day')
     FROM dates
@@ -32,9 +22,6 @@ def d_datum(psy_connection):
             SELECT
             date(date) datum
             FROM dates)
-    );                    
-    """)
-    
-    psy_connection.commit()  
-                            
-    print('transform & load d_datum gereed')
+    );      
+
+              
