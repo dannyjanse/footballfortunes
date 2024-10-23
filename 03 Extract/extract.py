@@ -16,7 +16,7 @@ EXT_odds = 'ja'
 # geef aan welke competities in scope zijn en welk seizoen opgehaald moet worden van de website football-data
 fd_stats_URL = 'https://www.football-data.co.uk/mmz4281'
 competities = ['E0','E1','D1','I1','SP1','FR1','N1','B1','P1','T1','G1']
-seizoen = 2324
+seizoen = 2425
 
 # na iedere speelronde haal je resultaten op en verwerk je de gerealiseerde bets, eenmalig.
 # voor de hierboven opgegeven competities en seizoen worden alle resultaten van website football-data gehaald.
@@ -36,7 +36,7 @@ apikey = '01f93cd4e8041d680add34efea99aff5'
 regions = 'eu'
 markets = 'h2h'
 competities = [['E0','soccer_epl'],['D1','soccer_germany_bundesliga'],['I1','soccer_italy_serie_a']
-                ,['SP1','soccer_spain_la_liga'], ['FR1','soccer_france_ligue_one'],['N1','soccer_netherlands_eredivisie']
+                ,['SP1','soccer_spain_la_liga'], ['F1','soccer_france_ligue_one'],['N1','soccer_netherlands_eredivisie']
                 ,['B1','soccer_belgium_first_div'] ,['P1','soccer_portugal_primeira_liga']
                 ,['T1','soccer_turkey_super_league'],['G1','soccer_greece_super_league']]
 

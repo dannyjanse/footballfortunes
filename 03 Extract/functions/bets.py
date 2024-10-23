@@ -6,8 +6,8 @@ def bets(psy_connection, sqal_connection):
     print('extract bethistorie gestart')
     psy_cursor = psy_connection.cursor()
 
-    ##path = f'C:\\Users\\JanseDanny\\OneDrive\\Documenten Danny\\Football Fortunes\\Bet_realisatie'
-    path = '/app/data/Bet_realisatie'
+    path = f'C:\\Users\\JanseDanny\\OneDrive\\Documenten Danny\\Football Fortunes\\Bet_realisatie'
+    #path = '/app/data/Bet_realisatie'
     excel_files = glob.glob(path + '/*.xlsx')
     print(path)
     print(excel_files)

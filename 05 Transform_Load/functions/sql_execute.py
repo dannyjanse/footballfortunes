@@ -8,8 +8,8 @@ def sql_execute(psy_connection, sql_bestand):
     print(f'Transform & Load {sql_bestand} gestart')
     
     # parent_directory = os.path.dirname(os.getcwd())
-    path = f'{os.getcwd()}/sql'
-    sql_file_path = glob.glob(path + f'/{sql_bestand}')
+    path = f'{os.getcwd()}\\05 transform_load\\sql'
+    sql_file_path = glob.glob(path + f'\\{sql_bestand}')
     print(path)
     print(sql_file_path)
 

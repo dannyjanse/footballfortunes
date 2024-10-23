@@ -20,4 +20,6 @@
     <include file="DWA_f_odds.sql"/>
     <include file="DWA_f_resultaten.sql"/>
     <include file="DWA_f_vorm.sql"/>
+    <include file="DWA_d_betparameters.sql"/>
+    <include file="KUBUS_analysebestand_VIEW.sql"/>
 </databaseChangeLog> 

@@ -10,7 +10,7 @@ INSERT INTO dwa_d_datum
     )
     SELECT 
     *
-    ,CASE WHEN maand > 6 THEN (CAST(jaar AS integer))||'/'||(CAST(jaar AS integer) + 1)
+    ,CASE WHEN maand <= 6 THEN (CAST(jaar AS integer))||'/'||(CAST(jaar AS integer) + 1)
         ELSE (CAST(jaar AS integer) - 1)||'/'||(CAST(jaar AS integer)) END AS seizoen
     ,CASE WHEN maand > 6 THEN 'voor' ELSE 'na' END AS winterstop
     FROM (

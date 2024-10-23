@@ -6,8 +6,8 @@ def quality_control(sqal_connection, controle_map):
 
     print(f'{controle_map} quality control gestart')
     
-    path = f'{os.getcwd()}/{controle_map}'
-    sql_files = glob.glob(path + '/*.sql')
+    path = f'{os.getcwd()}\\04 qualitydsa\\{controle_map}\\'
+    sql_files = glob.glob(path + '*.sql')
     print(path)
     print(sql_files)
     aantal_issues = 0
@@ -15,7 +15,7 @@ def quality_control(sqal_connection, controle_map):
     for sql_file in sql_files:
         
     # Lees het SQL-bestand in en voer de queries uit
-        with open(sql_file) as file:
+        with open(sql_file, 'r') as file:
             sql_script = file.read()
             resultaten = pd.read_sql(sql_script, sqal_connection)
                     

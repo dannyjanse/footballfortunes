@@ -10,16 +10,24 @@ WITH wedstrijden AS (
 		on fr.datum = dd.datum 
     )
 SELECT 
-row_number() over (partition BY team, seizoen order by datum desc) nr
+row_number() over (partition BY team order by datum desc) nr
 ,*
 ,LAG(GRW, 0) OVER (partition BY team, seizoen order by datum) +
  LAG(GRW, 1) OVER (partition BY team, seizoen order by datum) +
  LAG(GRW, 2) OVER (partition BY team, seizoen order by datum) +
- LAG(GRW, 3) OVER (partition BY team, seizoen order by datum) AS GR -- Goalratio
+ LAG(GRW, 3) OVER (partition BY team, seizoen order by datum) AS GR_na -- Goalratio
 ,LAG(SRW, 0) OVER (partition BY team, seizoen order by datum) +
  LAG(SRW, 1) OVER (partition BY team, seizoen order by datum) +
  LAG(SRW, 2) OVER (partition BY team, seizoen order by datum) +
- LAG(SRW, 3) OVER (partition BY team, seizoen order by datum) AS SR -- Shotratio
+ LAG(SRW, 3) OVER (partition BY team, seizoen order by datum) AS SR_na -- Shotratio
+,LAG(GRW, 1) OVER (partition BY team, seizoen order by datum) +
+ LAG(GRW, 2) OVER (partition BY team, seizoen order by datum) +
+ LAG(GRW, 3) OVER (partition BY team, seizoen order by datum) +
+ LAG(GRW, 4) OVER (partition BY team, seizoen order by datum) AS GR_voor -- Goalratio
+,LAG(SRW, 1) OVER (partition BY team, seizoen order by datum) +
+ LAG(SRW, 2) OVER (partition BY team, seizoen order by datum) +
+ LAG(SRW, 3) OVER (partition BY team, seizoen order by datum) +
+ LAG(SRW, 4) OVER (partition BY team, seizoen order by datum) AS SR_voor -- Shotratio
  FROM (
 		SELECT 
 		hometeam AS team
@@ -36,5 +44,5 @@ row_number() over (partition BY team, seizoen order by datum desc) nr
 		ORDER BY team, datum
 		) GR;
 		
-insert into dwa_f_vorm (nr, team, GRW, SRW, seizoen, hometeam, awayteam, s_wedstrijd, datum, fthg, ftag, hsh, ash, GR, SR)
+insert into dwa_f_vorm (nr, team, GRW, SRW, seizoen, hometeam, awayteam, s_wedstrijd, datum, fthg, ftag, hsh, ash, GR_na, SR_na, GR_voor, SR_voor)
 select * from vorm;

@@ -7,3 +7,5 @@ DAARNA ONDERSTAANDE COMMANDO's RUNNEN
 
 docker build -t extract .
 docker run -v "C:/Users/JanseDanny/OneDrive/Documenten Danny/Football Fortunes:/app/data" -it extract
+
+

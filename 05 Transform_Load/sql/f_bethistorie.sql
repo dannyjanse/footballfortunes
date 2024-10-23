@@ -23,5 +23,5 @@ bets.speelronde
     END 
 FROM DSA_bets bets
 LEFT JOIN dwa_d_wedstrijden wedstrijd
-	ON bets.hometeam = wedstrijd.hometeam AND bets.awayteam = wedstrijd.awayteam 
+	ON bets.hometeam = wedstrijd.hometeam AND bets.awayteam = wedstrijd.awayteam and bets.competitie = wedstrijd.competitie
 ;

@@ -1,11 +1,19 @@
 DELETE FROM dwa_f_resultaten;
 
+drop table if exists unieke_teamnamen;
+create temp table unieke_teamnamen as
+select team_fd, max(team) as team
+from DWA_d_teams ddt 
+group by team_fd
+;
+
+drop table if exists resultaten;
 CREATE TEMPORARY TABLE resultaten as
 SELECT 
 div,
 date,
-dt.team AS hometeam,
-dt2.team AS awayteam,
+utn1.team AS hometeam,
+utn2.team AS awayteam,
 fthg,
 ftag,
 ftr,
@@ -25,8 +33,8 @@ ay,
 hr,
 ar
 FROM dsa_fd_stats fs2
-    LEFT JOIN dwa_d_teams dt ON fs2.hometeam = dt.team_fd
-    LEFT JOIN dwa_d_teams dt2 ON fs2.awayteam = dt2.team_fd
+    LEFT JOIN unieke_teamnamen utn1 ON fs2.hometeam = utn1.team_fd
+    LEFT JOIN unieke_teamnamen utn2 ON fs2.awayteam = utn2.team_fd
 ;
 
 INSERT INTO dwa_f_resultaten  
@@ -35,7 +43,7 @@ SELECT
 dw.s_wedstrijd	
 ,r.hometeam
 ,r.awayteam
-,date((substring(r.date, 7, 2)+2000)||'-'||substring(r.date, 4, 2)||'-'||substring(r.date, 1, 2))       datum		
+,date((substring(r.date, length(r.date)-1, 2)+2000)||'-'||substring(r.date, 4, 2)||'-'||substring(r.date, 1, 2))       datum		
 ,cast(case when r.fthg = 'NaN' then null else r.fthg end as Decimal)                                    fthg
 ,cast(case when r.ftag = 'NaN' then null else r.ftag end as Decimal)                                    ftag
 ,r.ftr                                                                                                  ftr
@@ -56,5 +64,5 @@ dw.s_wedstrijd
 ,cast(case when r.ar = 'NaN' then null else r.ar end as Decimal)                                        ar
 FROM resultaten r
 LEFT JOIN dwa_d_wedstrijden dw 
-    on (r.hometeam = dw.hometeam and r.awayteam = dw.awayteam)
+    on (r.hometeam = dw.hometeam and r.awayteam = dw.awayteam and r.div = dw.competitie);
     ;  

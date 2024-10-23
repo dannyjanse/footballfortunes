@@ -1,5 +1,19 @@
 delete from dwa_f_odds;
 
+drop table if exists unieke_teamnamen_fd_stats;
+create temp table unieke_teamnamen_fd_stats as
+select team_fd, max(team) as team
+from DWA_d_teams ddt 
+group by team_fd
+;
+
+drop table if exists unieke_teamnamen_oddapi;
+create temp table unieke_teamnamen_oddapi as
+select team_oddapi, max(team) as team
+from DWA_d_teams ddt 
+group by team_fd
+;
+
 CREATE TEMPORARY TABLE all_odds AS
 SELECT 
 sel.div,
@@ -17,8 +31,8 @@ FROM ( SELECT
         ,wk.wedkantoor
         ,CAST(replace(oo.h_odd_price, ',', '.') AS numeric(10,2)) h_odd_price
         FROM dsa_oddapi_odds oo
-        LEFT JOIN dwa_d_teams dt ON oo.hometeam = dt.team_oddapi
-        LEFT JOIN dwa_d_teams dt2 ON oo.awayteam = dt2.team_oddapi
+        LEFT JOIN unieke_teamnamen_oddapi dt ON oo.hometeam = dt.team_oddapi
+        LEFT JOIN unieke_teamnamen_oddapi dt2 ON oo.awayteam = dt2.team_oddapi
         LEFT JOIN dwa_d_wedkantoren wk ON oo.wedkantoor = wk.wk_oddapi
         ) sel
 WHERE sel.rownr = 1
@@ -34,7 +48,7 @@ wk.wedkantoor,
 odds.h_odd_price
 FROM ( SELECT 
  		fd_stats.div
- 		,date((substring(fd_stats.date, 7, 2)+2000)||'-'||substring(fd_stats.date, 4, 2)||'-'||substring(fd_stats.date, 1, 2)) datum
+ 		,date((substring(fd_stats.date, length(fd_stats.date) -1, 2)+2000)||'-'||substring(fd_stats.date, 4, 2)||'-'||substring(fd_stats.date, 1, 2)) datum
         ,fd_stats.hometeam
         ,fd_stats.awayteam
         ,'B365' AS wedkantoor
@@ -43,7 +57,7 @@ FROM ( SELECT
        UNION
        SELECT 
  		fd_stats.div
- 		,date((substring(fd_stats.date, 7, 2)+2000)||'-'||substring(fd_stats.date, 4, 2)||'-'||substring(fd_stats.date, 1, 2)) datum
+ 		,date((substring(fd_stats.date, length(fd_stats.date) -1, 2)+2000)||'-'||substring(fd_stats.date, 4, 2)||'-'||substring(fd_stats.date, 1, 2)) datum
         ,fd_stats.hometeam
         ,fd_stats.awayteam
         ,'BS' AS wedkantoor
@@ -52,8 +66,8 @@ FROM ( SELECT
        UNION
        SELECT 
  		fd_stats.div
- 		,date((substring(fd_stats.date, 7, 2)+2000)||'-'||substring(fd_stats.date, 4, 2)||'-'||substring(fd_stats.date, 1, 2)) datum
-        ,fd_stats.hometeam
+ 		,date((substring(fd_stats.date, length(fd_stats.date) -1, 2)+2000)||'-'||substring(fd_stats.date, 4, 2)||'-'||substring(fd_stats.date, 1, 2)) datum
+         ,fd_stats.hometeam
         ,fd_stats.awayteam
         ,'BW' AS wedkantoor
         ,CAST(replace(fd_stats.bwh, ',', '.') AS numeric(10,2)) h_odd_price
@@ -61,7 +75,7 @@ FROM ( SELECT
        UNION
        SELECT 
  		fd_stats.div
- 		,date((substring(fd_stats.date, 7, 2)+2000)||'-'||substring(fd_stats.date, 4, 2)||'-'||substring(fd_stats.date, 1, 2)) datum
+ 		,date((substring(fd_stats.date, length(fd_stats.date) -1, 2)+2000)||'-'||substring(fd_stats.date, 4, 2)||'-'||substring(fd_stats.date, 1, 2)) datum
         ,fd_stats.hometeam
         ,fd_stats.awayteam
         ,'GB' AS wedkantoor
@@ -70,7 +84,7 @@ FROM ( SELECT
        UNION
        SELECT 
  		fd_stats.div
- 		,date((substring(fd_stats.date, 7, 2)+2000)||'-'||substring(fd_stats.date, 4, 2)||'-'||substring(fd_stats.date, 1, 2)) datum
+ 		,date((substring(fd_stats.date, length(fd_stats.date) -1, 2)+2000)||'-'||substring(fd_stats.date, 4, 2)||'-'||substring(fd_stats.date, 1, 2)) datum
         ,fd_stats.hometeam
         ,fd_stats.awayteam
         ,'IW' AS wedkantoor
@@ -79,7 +93,7 @@ FROM ( SELECT
        UNION
        SELECT 
  		fd_stats.div
- 		,date((substring(fd_stats.date, 7, 2)+2000)||'-'||substring(fd_stats.date, 4, 2)||'-'||substring(fd_stats.date, 1, 2)) datum
+ 		,date((substring(fd_stats.date, length(fd_stats.date) -1, 2)+2000)||'-'||substring(fd_stats.date, 4, 2)||'-'||substring(fd_stats.date, 1, 2)) datum
         ,fd_stats.hometeam
         ,fd_stats.awayteam
         ,'IW' AS wedkantoor
@@ -88,7 +102,7 @@ FROM ( SELECT
        UNION
        SELECT 
  		fd_stats.div
- 		,date((substring(fd_stats.date, 7, 2)+2000)||'-'||substring(fd_stats.date, 4, 2)||'-'||substring(fd_stats.date, 1, 2)) datum
+ 		,date((substring(fd_stats.date, length(fd_stats.date) -1, 2)+2000)||'-'||substring(fd_stats.date, 4, 2)||'-'||substring(fd_stats.date, 1, 2)) datum
         ,fd_stats.hometeam
         ,fd_stats.awayteam
         ,'PS' AS wedkantoor
@@ -97,7 +111,7 @@ FROM ( SELECT
        UNION
        SELECT 
  		fd_stats.div
- 		,date((substring(fd_stats.date, 7, 2)+2000)||'-'||substring(fd_stats.date, 4, 2)||'-'||substring(fd_stats.date, 1, 2)) datum
+ 		,date((substring(fd_stats.date, length(fd_stats.date) -1, 2)+2000)||'-'||substring(fd_stats.date, 4, 2)||'-'||substring(fd_stats.date, 1, 2)) datum
         ,fd_stats.hometeam
         ,fd_stats.awayteam
         ,'SO' AS wedkantoor
@@ -106,7 +120,7 @@ FROM ( SELECT
        UNION
        SELECT 
  		fd_stats.div
- 		,date((substring(fd_stats.date, 7, 2)+2000)||'-'||substring(fd_stats.date, 4, 2)||'-'||substring(fd_stats.date, 1, 2)) datum
+ 		,date((substring(fd_stats.date, length(fd_stats.date) -1, 2)+2000)||'-'||substring(fd_stats.date, 4, 2)||'-'||substring(fd_stats.date, 1, 2)) datum
         ,fd_stats.hometeam
         ,fd_stats.awayteam
         ,'SB' AS wedkantoor
@@ -115,7 +129,7 @@ FROM ( SELECT
        UNION
        SELECT 
  		fd_stats.div
- 		,date((substring(fd_stats.date, 7, 2)+2000)||'-'||substring(fd_stats.date, 4, 2)||'-'||substring(fd_stats.date, 1, 2)) datum
+ 		,date((substring(fd_stats.date, length(fd_stats.date) -1, 2)+2000)||'-'||substring(fd_stats.date, 4, 2)||'-'||substring(fd_stats.date, 1, 2)) datum
         ,fd_stats.hometeam
         ,fd_stats.awayteam
         ,'SJ' AS wedkantoor
@@ -124,7 +138,7 @@ FROM ( SELECT
        UNION
        SELECT 
  		fd_stats.div
- 		,date((substring(fd_stats.date, 7, 2)+2000)||'-'||substring(fd_stats.date, 4, 2)||'-'||substring(fd_stats.date, 1, 2)) datum
+ 		,date((substring(fd_stats.date, length(fd_stats.date) -1, 2)+2000)||'-'||substring(fd_stats.date, 4, 2)||'-'||substring(fd_stats.date, 1, 2)) datum
         ,fd_stats.hometeam
         ,fd_stats.awayteam
         ,'SY' AS wedkantoor
@@ -133,7 +147,7 @@ FROM ( SELECT
        UNION
        SELECT 
  		fd_stats.div
- 		,date((substring(fd_stats.date, 7, 2)+2000)||'-'||substring(fd_stats.date, 4, 2)||'-'||substring(fd_stats.date, 1, 2)) datum
+ 		,date((substring(fd_stats.date, length(fd_stats.date) -1, 2)+2000)||'-'||substring(fd_stats.date, 4, 2)||'-'||substring(fd_stats.date, 1, 2)) datum
         ,fd_stats.hometeam
         ,fd_stats.awayteam
         ,'VC' AS wedkantoor
@@ -142,14 +156,14 @@ FROM ( SELECT
        UNION
        SELECT 
  		fd_stats.div
- 		,date((substring(fd_stats.date, 7, 2)+2000)||'-'||substring(fd_stats.date, 4, 2)||'-'||substring(fd_stats.date, 1, 2)) datum
+ 		,date((substring(fd_stats.date, length(fd_stats.date) -1, 2)+2000)||'-'||substring(fd_stats.date, 4, 2)||'-'||substring(fd_stats.date, 1, 2)) datum
         ,fd_stats.hometeam
         ,fd_stats.awayteam
         ,'WH' AS wedkantoor
         ,CAST(replace(fd_stats.whh, ',', '.') AS numeric(10,2)) h_odd_price
        FROM dsa_fd_stats fd_stats) odds
-  LEFT JOIN dwa_d_teams dt ON odds.hometeam = dt.team_fd
-  LEFT JOIN dwa_d_teams dt2 ON odds.awayteam = dt2.team_fd
+  LEFT JOIN unieke_teamnamen_fd_stats dt ON odds.hometeam = dt.team_fd
+  LEFT JOIN unieke_teamnamen_fd_stats dt2 ON odds.awayteam = dt2.team_fd
   LEFT JOIN dwa_d_wedkantoren wk ON odds.wedkantoor = wk.wk_fd
   WHERE h_odd_price IS NOT NULL
 ;

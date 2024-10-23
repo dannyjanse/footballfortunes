@@ -1,6 +1,6 @@
 --liquibase formatted sql
 
---changeset DJ:init-1
+--changeset DJ:init-4
 DROP TABLE IF EXISTS DWA_f_vorm;
 CREATE TABLE DWA_f_vorm(
     nr Integer
@@ -16,6 +16,8 @@ CREATE TABLE DWA_f_vorm(
     ,ftag Integer
     ,hsh Real
     ,ash Real
-	,GR Integer
-	,SR Integer
+	,GR_na Integer
+	,SR_na Integer
+    ,GR_voor Integer
+	,SR_voor Integer
     );
