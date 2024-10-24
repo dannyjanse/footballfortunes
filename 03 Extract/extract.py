@@ -15,7 +15,7 @@ EXT_odds = 'ja'
 
 # geef aan welke competities in scope zijn en welk seizoen opgehaald moet worden van de website football-data
 fd_stats_URL = 'https://www.football-data.co.uk/mmz4281'
-competities = ['E0','E1','D1','I1','SP1','FR1','N1','B1','P1','T1','G1']
+competities = ['E0','E1','D1','I1','SP1','F1','N1','B1','P1','T1','G1']
 seizoen = 2425
 
 # na iedere speelronde haal je resultaten op en verwerk je de gerealiseerde bets, eenmalig.

@@ -3,7 +3,6 @@ START NIEUW SEIZOEN:
 	- Extract laatste resultaten van het oude seizoen
 	- check de aantallen per competitie en onderzoek eventuele gekke resultaten
 	- voeg een record toe aan CONTROLETABEL met aantallen van het oude seizoen
-	- PARAMETER AANPASSEN: voeg het oude seizoen toe aan de controle analyse in 'QualityDSA/dsa_fd_stats.sql'
 - Extract data nieuwe seizoen
 	- PARAMETER AANPASSEN: haal data van het nieuwe seizoen op in 'Extract/fd_stats.py'
 - Nieuwe teamnamen toevoegen aan dwa_d_teams
@@ -12,12 +11,14 @@ START NIEUW SEIZOEN:
 	- voeg ontbrekende teams toe
 
 TO DO: 
+- DDL: rename DWA_f_bethistorie naar DWA_f_bets
 - ETL pijplijn
 	- inrichten QualityDWA proces met daarin
 		- aantallencheck
 		- dubbelencheck, wellicht hashes toevoegen en daarmee beter de sleutels definieren?
 		- NULL checks
-	- foutafhandeling in main.py en loglevel in monitor
+	- print een controle_tabel voor psv uit kubus, zodat je makkelijk ziet of data klopt
+	- foutafhandeling in main.py en loglevel in console
 	- temp tabellen vervangen door with tabellen
 - Analysemodel verbeteren
 - Airflow voor automatische ETL en monitoring

@@ -19,6 +19,14 @@ with
 			,*
 			from dsa_fd_stats fs2) mndjr 
 	) ,
+	huidig_seizoen as (
+	select 
+	CASE WHEN maand > 6 THEN (CAST(jaar AS integer) - 2000)||(CAST(jaar AS integer) - 1999) --het jaartal minus 2000 en plus 1
+        ELSE (CAST(jaar AS integer) - 2001)||(CAST(jaar AS integer) - 2000) END AS seizoen 
+    from (select 
+			strftime('%Y', 'now') jaar
+			,strftime('%m', 'now') maand)
+	),
 	teamnamen_fd_stats as (
 		select distinct team from (select hometeam as team from dsa_fd_stats union select awayteam as team from dsa_fd_stats))
 -- check of er in dubbele waarden zitten in fd_stats obv unieke combi hometeam, awayteam en date
@@ -40,7 +48,7 @@ from (
 		select sz.div, sz.seizoen, min(wa.aantal) as aantal_controle, count(sz.seizoen) as aantal_werkelijk from aantallen_per_seizoen_fd_stats sz
 		left outer join controle_wedstrijdaantallen wa
 			on sz.div = wa.div and sz.seizoen = wa.seizoen
-		where sz.seizoen <> '2425'
+		where sz.seizoen <> (select * from huidig_seizoen)
 		group by sz.seizoen, sz.div order by sz.div, sz.seizoen) vergelijk 
 	) aantallen_check
 ---

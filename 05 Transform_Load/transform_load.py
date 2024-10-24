@@ -9,7 +9,7 @@ psy_connection = myf.connect_to_db()[0]
 sqal_connection = myf.connect_to_db()[1]
 
 ####################################### TRANSFORM & LOAD ##################################
- 
+
 
 myf.sql_execute(psy_connection, 'd_datum.sql')
 myf.sql_execute(psy_connection, 'd_wedstrijden.sql')
@@ -18,6 +18,7 @@ myf.sql_execute(psy_connection, 'd_betparameters.sql')
 myf.sql_execute(psy_connection, 'f_bethistorie.sql')
 myf.sql_execute(psy_connection, 'f_odds.sql')
 myf.sql_execute(psy_connection, 'f_resultaten.sql')
+
 # let op, f_vorm is afhaneklijk van f_resultaten en moet dus na f_resultaten
 myf.sql_execute(psy_connection, 'f_vorm.sql')
 
