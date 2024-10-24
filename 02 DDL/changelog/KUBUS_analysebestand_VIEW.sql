@@ -1,6 +1,6 @@
 --liquibase formatted sql
 
---changeset DJ:init-5
+--changeset DJ:init-6
 drop view if exists KUBUS_analysebestand;
 create view KUBUS_analysebestand as
 with odds as(
@@ -10,11 +10,18 @@ from dwa_f_odds
 group by 1,2,3
 )
 select 
-vormh.seizoen
-,ddw.competitie
-,dfr.*
-, vormh.GR_voor GRH, vorma.GR_voor GRA, (vormh.GR_voor - vorma.GR_voor) GRO
-, vormh.SR_voor SRH, vorma.SR_voor SRA, (vormh.SR_voor - vorma.SR_voor) SRO
+ddw.competitie
+,vormh.seizoen
+,dfr.datum
+,dfr.hometeam
+,dfr.awayteam
+,dfr.fthg, dfr.ftag ,dfr.ftr
+,dfr.hsh ,dfr.ash
+,dfr.hst ,dfr.ast
+,dfr.hf ,dfr.af
+,dfr.hc ,dfr.ac
+,vormh.GR_voor GRH, vorma.GR_voor GRA, (vormh.GR_voor - vorma.GR_voor) GRO
+,vormh.SR_voor SRH, vorma.SR_voor SRA, (vormh.SR_voor - vorma.SR_voor) SRO
 ,odds.odd_prijs best_odd, bet.rea_odd, bet.rea_inzet, bet.wedkantoor 
 from DWA_f_resultaten dfr 
 left join odds
